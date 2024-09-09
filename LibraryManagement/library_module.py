@@ -75,9 +75,11 @@ class LibraryUser(User):
             else:
                     return "unable to return book"
     def track_borrowed_books(self):
-        print("books borrowed:")
-        for book in self.borrowed_books:
-            print(book.display_book_details())
-        return 0
+        if not self.borrowed_books:
+            print("No books have been borrowed")
+        else:
+            print("books borrowed:")
+            for book in self.borrowed_books:
+                print(book.display_book_details())
 
 
