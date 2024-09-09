@@ -1,11 +1,16 @@
-import uuid
-
 class Book:
+    id=300
     def __init__(self):
         self.title=input("book title:")
         self.author=input("author:")
-        self.book_id=uuid.uuid4()
+        Book.id+=1
+        self.book_id=Book.id
         self.borrowed_status=False
+    def display_book_details(self):
+        print("id:",self.book_id)
+        print("title:",self.title)
+        print("author:",self.author)
+
 
 class Library:
     def __init__(self):
@@ -27,7 +32,7 @@ class Library:
         book_found=False
         for book in self.book_collection:
             if book_title.lower() in book.title.lower():
-                print(book)
+                print(book.display_book_details())
                 book_found=True
         if not book_found:
             print("book not found")
@@ -36,9 +41,11 @@ class Library:
             yield book
 
 class User:
+    id=1000
     def __init__(self):
         self.name=input("user name:")
-        self.user_id=uuid.uuid4()
+        User.id+=1
+        self.user_id=User.id
     def display_user_details(self):
         print("User Id",self.user_id)
         print("User Name",self.name)
@@ -59,7 +66,7 @@ class LibraryUser(User):
             else:
                 return "book not found"
     def return_book(self,library):
-        book_id=input("book id:")
+        book_id=int(input("book id:"))
         for book in library.book_collection:
             if book.book_id==book_id and book.borrowed_status==True and book in self.borrowed_books:
                     book.borrowed_status=False
@@ -70,6 +77,7 @@ class LibraryUser(User):
     def track_borrowed_books(self):
         print("books borrowed:")
         for book in self.borrowed_books:
-            print(book)
+            print(book.display_book_details())
+        return 0
 
 
