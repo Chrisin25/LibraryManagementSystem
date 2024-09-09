@@ -3,7 +3,7 @@ print("library")
 new_library=Library()
 stop=False
 while not stop:
-    choice = int(input("Enter your choice:1.add book 2.remove book 3.search book 4.generate book."))
+    choice = int(input("Enter your choice:1.add book 2.remove book 3.search book 4.display book."))
     if choice==1:
         print(new_library.add_book())
     elif choice==2:
@@ -13,7 +13,8 @@ while not stop:
         book_title=input("enter book title:")
         new_library.search_book(book_title)
     elif choice==4:
-        new_library.generate_book()
+        for book in new_library.generate_book():
+            book.display_book_details()
     else:
         print("invalid choice")
     response=input("do you want to continue: y or n")
